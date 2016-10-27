@@ -1,0 +1,7 @@
+Graph of words9.txt:
+
+                               cords
+                             9/     \20
+  leads --10--loads--17--lords--11--words--6--wordy
+                |5                    |3
+              goads--14--goods--16--woods

@@ -1,0 +1,7 @@
+Graph of words4.txt:
+
+      cords
+    9/     \20
+lords--11--words
+             |3
+           woods
