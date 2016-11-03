@@ -27,7 +27,47 @@ protected:
     node<V>* heap;
 
 public:
+    FibonacciHeap() {
+        heap=_empty();
+    }
+    virtual ~FibonacciHeap() {
+        if(heap) {
+            _deleteAll(heap);
+        }
+    }
+    node<V>* insert(V value) {
+        node<V>* ret=_singleton(value);
+        heap=_merge(heap,ret);
+        return ret;
+    }
+    void merge(FibonacciHeap& other) {
+        heap=_merge(heap,other.heap);
+        other.heap=_empty();
+    }
 
+    bool isEmpty() {
+        return heap==NULL;
+    }
+
+    V getMinimum() {
+        return heap->value;
+    }
+
+    V extractMinimum() {
+        node<V>* old=heap;
+        heap=_removeMinimum(heap);
+        V ret=old->value;
+        delete old;
+        return ret;
+    }
+
+    void decreaseKey(node<V>* n,V value) {
+        heap=_decreaseKey(heap,n,value);
+    }
+
+    node<V>* find(V value) {
+        return _find(heap,value);
+    }
 private:
 
 };
