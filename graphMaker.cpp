@@ -78,20 +78,27 @@ void addEdge(struct Graph* graph, int src, int dest, int weight)
 void printGraph(struct Graph* graph, vector<string>& wordList)
 {
     int v;
+    ofstream myfile;
+    myfile.open ("4-words4_graph.txt");
+
     printf("Adjacency list of every node:\n");
     for (v = 0; v < graph->V; ++v)
     {
         struct AdjListNode* pCrawl = graph->array[v].head;
         //printf("%s", wordList[v]);
         cout << wordList[v];
+        myfile << wordList[v];
         while (pCrawl)
         {
             //printf("-> %s,%d", wordList[pCrawl->dest],pCrawl->weight);
             cout << "->" << wordList[pCrawl->dest] << "," << pCrawl->weight;
+            myfile << "->" << wordList[pCrawl->dest] << "," << pCrawl->weight;
             pCrawl = pCrawl->next;
         }
         printf("\n");
+        myfile << "\n";
     }
+    myfile.close();
 }
 
 // Driver program to test above functions
