@@ -104,11 +104,28 @@ void printGraph(struct Graph* graph, vector<string>& wordList)
 // Driver program to test above functions
 int main()
 {
-    vector<string> wordList {"words", "cords", "lords", "woods"};
+    vector<string> wordList;// {"words", "cords", "lords", "woods"};
+
     map<string, vector<string> > bucketList;
     string word;
     string bucket;
-    string array[] = {"words", "cords", "lords", "woods"};
+    //ifstream myfile ("/Users/ashiragendelman/Documents/EC504/GraphMaker/4-words4.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/4-words4.txt");
+    if(myfile)
+    {
+        while (getline(myfile,word)) {
+            cout << word << endl;
+            wordList.push_back(word);
+        }
+    }
+    else
+    {
+        cout<<"Error opening word list txt file"<<endl;
+        return -1;
+    }
+    myfile.close();
+
+    cout << wordList.size() << endl;
     for (int i =0; i< wordList.size(); i++) {
         for (int j=0; j<wordList[i].length(); j++) {
             bucket = wordList[i].substr(0,j) + '_' + wordList[i].substr(j+1,wordList[i].length()-1);
@@ -123,17 +140,17 @@ int main()
     for (auto b: bucketList){
         //cout << endl << b.first << " has the following " << b.second.size() <<  " words: ";
         if (b.first.size() > 1) {
-            for (auto w: b.second){
-                //cout << w << endl;
-                for (auto x: b.second){
-                    //cout << w << endl;
-                    if (w != x){
-                        diffLetter_index = b.first.find("_");
-                        weight = abs(w[diffLetter_index] - x[diffLetter_index]);
-                        pos_w = find(wordList.begin(), wordList.end(), w)-wordList.begin();
-                        pos_x = find(wordList.begin(), wordList.end(), x)-wordList.begin();
-                        addEdge(graph,pos_w,pos_x,weight);
-                    }
+            //for (auto w: b.second){
+            for (int w=0; w<b.second.size(); w++){
+
+                //for (auto x: b.second()){
+                for (int x=w+1; x<b.second.size(); x++){
+                    diffLetter_index = b.first.find("_");
+                    weight = abs(b.second[w][diffLetter_index] - b.second[x][diffLetter_index]);
+                    pos_w = find(wordList.begin(), wordList.end(), b.second[w])-wordList.begin();
+                    pos_x = find(wordList.begin(), wordList.end(), b.second[x])-wordList.begin();
+                    addEdge(graph,pos_w,pos_x,weight);
+
                 }
             }
         }
