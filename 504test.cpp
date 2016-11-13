@@ -18,9 +18,12 @@ int main ()
     queue.insert(make_pair("lord", 4));
 
     cout << queue.begin() -> first << endl;
-    const bool is_in = queue.find(make_pair("lord", 3)) != queue.end();
+    pair<string, int> tmp = make_pair("lord", 4);
+    const bool is_in = queue.find(tmp) != queue.end();
     cout << is_in << endl;
-    queue.erase(queue.begin());
+    queue.erase(tmp);
+    const bool is_in2 = queue.find(tmp) != queue.end();
+    cout << is_in2 << endl;
     cout << queue.begin() -> first << endl;
     return 0;
 }

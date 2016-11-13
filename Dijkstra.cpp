@@ -17,13 +17,14 @@ using namespace std;
 
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         , vector<string>& wordList, string start, string stop){
+    /* ****** initializing everything ***** */
     //store path sum of each node
     map<string, int> dist;
     //store parent of each node
     map<string, string> prev;
     //our priority queue here
-    //overriding the comparator of pair set
 
+    //overriding the comparator of pair pq
     struct QComparator
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
@@ -31,15 +32,51 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
             return left.second < right.second;
         }
     };
+    //initialize the visited set
+    //to store the visited nodes later
+    unordered_set<string> visited;
+    //initialize our pq by using customized comparator
     set<pair<string, int>, QComparator> pq;
     for(int i = 0; i < wordList.size(); i ++){
-        dist[wordList[i]] = numeric_limits<int>::max();
-        prev[wordList[i]] = "*";
+        if(start.compare(wordList[i]) == true){//our starting point
+            dist[wordList[i]] = 0; // the distance from starting point to itself is zero
+            pq.insert(make_pair(wordList[i], 0));//add the starting point to our pq
+            visited.insert(start);//set the start point to be visited
+        }else{
+            dist[wordList[i]] = numeric_limits<int>::max();
+            //adding each node to the pq, each weight is max_int
+            pq.insert(make_pair(wordList[i], numeric_limits<int>::max()));
+        }
+        prev[wordList[i]] = "*";//parent of each node is always null initially
     }
-    unordered_set<string> visited;//store the visited nodes
 
-    return 0;
-    
+    /* ****** tracing every path ***** */
+    pair<string, int> tmp;// a buffer to store node
+    while(!pq.empty()){
+        string current = pq.begin() -> first;
+        pq.erase(pq.begin());//pops out the smallest item
+        for(int j = 0; j < adjacencyList[current]; j ++){
+            string neighbour = adjacencyList[current][j].first;
+            tmp = make_pair(neighbour, dist[neighbour]);
+            const bool is_in = visited.find(neighbour) != visited.end();
+            if(!is_in){//if this neighbour has never been visited
+                //adjacencyList[current][j].second is the weight between neighbour and current
+                if(dist[neighbour] > adjacencyList[current][j].second + dist[current]){
+                    //update the weight in dist array with the smaller path sum
+                    dist[neighbour] = adjacencyList[current][j].second + dist[current];
+                    prev[neighbour] = current; // update the parent
+
+                    //decrease the key of the neighbour to the latest path sum
+                    pq.erase(tmp);
+                    pq.erase(make_pair(neighbour, dist[neighbour]));
+                }
+                visited.insert(adjacencyList[current][j].first);//set current node to be visited
+            }
+        }
+
+    }
+    //return the path sum of the ending point
+    return dist[stop];
 };
 
 int main() {
