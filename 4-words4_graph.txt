@@ -1,0 +1,4 @@
+cords->words,20->lords,9
+lords->words,11->cords,9
+words->woods,3->lords,11->cords,20
+woods->words,3
