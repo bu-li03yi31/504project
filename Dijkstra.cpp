@@ -78,6 +78,17 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         }
 
     }
+    string path = stop;
+    path += "<-";
+    string s = stop;
+    while(s.compare(start) != 0){
+        path = path + prev[s];
+        if(prev[s].compare(start) != 0){
+            path = path + "<-";
+        }
+        s = prev[s];
+    }
+    cout << path << endl;
     //return the path sum of the ending point
     return dist[stop];
 };
