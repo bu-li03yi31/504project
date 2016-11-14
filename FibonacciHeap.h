@@ -13,7 +13,7 @@ public:
 	FibNode *next;
 	FibNode *child;
 	bool marked;
-	FibNode(type data) :key(data), degree(0), parent(nullptr), prev(nullptr), next(nullptr), marked(false) {}
+	FibNode(type data) :key(data), degree(0), parent(NULL), prev(NULL), next(NULL), marked(false) {}
 	FibNode* getnext() {
 		return this->next;
 	}
@@ -29,7 +29,7 @@ private:
 	FibNode *head;
 	FibNode *tail;
 public:
-	FibHeap() :NodeNum(0), MaxDegree(0), Min(nullptr), head(nullptr), tail(nullptr) {}
+	FibHeap() :NodeNum(0), MaxDegree(0), Min(NULL), head(NULL), tail(NULL) {}
 	//~FibHeap();
 	void insert(type key);
 	FibNode *ExtractMin();
