@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#define filename "4-words4.txt"
 
 using namespace std;
 
@@ -110,7 +109,7 @@ int main()
     string word;
     string bucket;
     //ifstream myfile ("/Users/ashiragendelman/Documents/EC504/GraphMaker/4-words4.txt");
-    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/4-words4.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53.txt");
     if(myfile)
     {
         while (getline(myfile,word)) {
@@ -155,37 +154,6 @@ int main()
             }
         }
     }
-
-
-
-
-//    ifstream myfile ("/Users/ashiragendelman/Documents/EC504/GraphMaker/4-words4.txt");
-//    //ifstream myfile ("4-words4.txt");
-//    if(myfile)
-//    {
-//        while (getline(myfile,word))
-//        cout << word << endl;
-//        wordList.push_back(word);
-//    }
-//    else
-//    {
-//        cout<<"Error opening word list txt file"<<endl;
-//        return -1;
-//    }
-//    myfile.close();
-
-    // create the graph given in above fugure
-//    int V = 5;
-//    struct Graph* graph = createGraph(V);
-//    addEdge(graph, 0, 1,1);
-//    addEdge(graph, 0, 4,4);
-//    addEdge(graph, 1, 2,1);
-//    addEdge(graph, 1, 3,2);
-//    addEdge(graph, 1, 4,3);
-//    addEdge(graph, 2, 3,1);
-//    addEdge(graph, 3, 4,1);
-//
-//    // print the adjacency list representation of the above graph
     printGraph(graph,wordList);
 
     return 0;

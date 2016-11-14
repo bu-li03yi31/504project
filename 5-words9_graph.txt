@@ -1,0 +1,9 @@
+cords->words,20->lords,9
+goads->goods,14->loads,5
+goods->goads,14->woods,16
+leads->loads,10
+loads->lords,17->leads,10->goads,5
+lords->loads,17->words,11->cords,9
+woods->words,3->goods,16
+words->wordy,6->woods,3->lords,11->cords,20
+wordy->words,6
