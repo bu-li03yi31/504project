@@ -9,13 +9,11 @@ int main ()
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
         {
-            return left.second <= right.second;
-            //return left.first.compare(right.first) == 0 && left.second < right.second;
-            /*if(left.first.compare(right.first) == 0){
-                return false;
+            if(left.second == right.second){
+                return left.first.compare(right.first) != 0;
             }else{
-                return left.second <= right.second;
-            }*/
+                return left.second < right.second;
+            }
         }
     };
     set<pair<string, int>, myComparator> queue;
@@ -25,7 +23,9 @@ int main ()
     queue.insert(make_pair("cord", 49));
     queue.insert(make_pair("dord", 40));
     queue.insert(make_pair("pord", 46));
+    queue.insert(make_pair("zord", 5));
     queue.insert(make_pair("word", 414));
+    queue.erase(make_pair("zord", 5));
     //queue.insert(make_pair("cord", 50));
 
 

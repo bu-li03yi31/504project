@@ -29,11 +29,11 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
         {
-            //if(left.second == right.second){
-            //    return left.first.compare(right.first);
-            //}else{
-                return left.second <= right.second;
-            //}
+            if(left.second == right.second){
+                return left.first.compare(right.first) != 0;
+            }else{
+                return left.second < right.second;
+            }
         }
     };
     //initialize the visited set
