@@ -22,17 +22,14 @@ int main ()
     queue.insert(make_pair("lord", 4));
     queue.insert(make_pair("cord", 49));
     queue.insert(make_pair("dord", 40));
-    queue.insert(make_pair("pord", 46));
     queue.insert(make_pair("zord", 5));
-    queue.insert(make_pair("word", 414));
-    queue.erase(make_pair("zord", 5));
     //queue.insert(make_pair("cord", 50));
 
 
 
     cout << queue.begin() -> first << endl;
-    queue.erase(queue.begin());
-    cout << queue.begin() -> first << endl;
+    //queue.erase(queue.begin());
+    //cout << queue.begin() -> first << endl;
     cout << queue.size() << endl;
 
     return 0;
