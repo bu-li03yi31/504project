@@ -76,7 +76,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
                 visited.insert(adjacencyList[current][j].first);//set current node to be visited
             }
         }
-
     }
 
     /* ***** print out the shortest path and returns the value ***** */
