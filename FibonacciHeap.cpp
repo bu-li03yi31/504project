@@ -24,13 +24,13 @@ void FibHeap::insert(type key) {
 }
 
 void FibHeap::unmarkandunparent(FibNode* node) {
-	if (node == nullptr) {
+	if (node == NULL) {
 		return;
 	}
 	FibNode* c = node->next;
 	while (c != node) {
 		c->marked = false;
-		c->parent = nullptr;
+		c->parent = NULL;
 		c = c->next;
 	}
 	c->marked = false;
