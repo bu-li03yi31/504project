@@ -29,7 +29,11 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
         {
-            return left.second < right.second;
+            //if(left.second == right.second){
+            //    return left.first.compare(right.first);
+            //}else{
+                return left.second <= right.second;
+            //}
         }
     };
     //initialize the visited set
@@ -37,8 +41,8 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     unordered_set<string> visited;
     //initialize our pq by using customized comparator
     set<pair<string, int>, QComparator> pq;
-    for(int i = 0; i < wordList.size(); i ++){
-        if(start.compare(wordList[i]) == true){//our starting point
+    for(int i = 0; i < wordList.size(); i++){
+        if(start.compare(wordList[i]) == 0){//our starting point
             dist[wordList[i]] = 0; // the distance from starting point to itself is zero
             pq.insert(make_pair(wordList[i], 0));//add the starting point to our pq
         }else{
@@ -67,7 +71,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
 
                     //decrease the key of the neighbour to the latest path sum
                     pq.erase(tmp);
-                    pq.erase(make_pair(neighbour, dist[neighbour]));
+                    pq.insert(make_pair(neighbour, dist[neighbour]));
                 }
                 visited.insert(adjacencyList[current][j].first);//set current node to be visited
             }
@@ -119,6 +123,6 @@ int main() {
     myfile.close();
     int test = Dijkstra(adjacencyList,wordList,"cords","woods");
 
-
+    cout << test << endl;
     return 0;
 }
