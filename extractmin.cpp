@@ -1,13 +1,15 @@
 #include"FibonacciHeap.h"
+
 #include<iostream>
 using namespace std;
 int main() {
-	int array[] = {7, 21, 18, 52, 38, 24, 17, 23, 39, 41};
+	int array[] = {7, 21, 18, 2098, 6};
 	FibHeap testHeap = FibHeap();
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		type key = array[i];
 		testHeap.insert(key);
 	}
+    printf("\n");
 	FibNode* Min = testHeap.ExtractMin();
 	FibNode* temp = Min->getnext();
 	while (temp != Min) {
@@ -19,6 +21,6 @@ int main() {
 	Min = testHeap.ExtractMin();
 	temp = Min;
 	testHeap.display(temp);
-	system("pause");
+	//system("pause");
 	return 0;
 }

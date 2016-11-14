@@ -8,8 +8,10 @@ void FibHeap::insert(type key) {
 		head->prev = tail;
 		Min = newnode;
 		NodeNum += 1;
+        printf("%d ",newnode ->key);
 		return;
 	}
+
 	tail->next = newnode;
 	newnode->prev = tail;
 	newnode->next = head;
@@ -20,6 +22,7 @@ void FibHeap::insert(type key) {
 	if (Min->key > key) {
 		Min = newnode;
 	}
+    printf("%d ",newnode ->key);
 	return;
 }
 
@@ -177,6 +180,7 @@ FibNode *FibHeap::ExtractMin() {
 		NodeNum--;
 		return Min;
 	}
+    return Min;
 }
 
 void FibHeap::display(FibNode* node) {
