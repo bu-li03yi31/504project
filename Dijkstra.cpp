@@ -78,6 +78,8 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         }
 
     }
+
+    /* ***** print out the shortest path and returns the value ***** */
     string path = stop;
     path += "<-";
     string s = stop;
