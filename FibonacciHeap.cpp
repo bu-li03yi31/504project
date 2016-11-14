@@ -1,5 +1,4 @@
 #include"FibonacciHeap.h"
-//comment
 void FibHeap::insert(type key) {
 	FibNode *newnode = new FibNode(key);
 	if (!head) {                           //heap  is empty;
@@ -28,12 +27,15 @@ void FibHeap::unmarkandunparent(FibNode* node) {
 	if (node == nullptr) {
 		return;
 	}
-	FibNode* c = node;
+	FibNode* c = node->next;
 	while (c != node) {
 		c->marked = false;
 		c->parent = nullptr;
 		c = c->next;
 	}
+	c->marked = false;
+	c->parent = NULL;
+	return;
 }
 
 FibNode *FibHeap::Consolidate(FibNode *z) {
@@ -140,20 +142,24 @@ FibNode *FibHeap::ExtractMin() {
 			z = z->child;
 		}
 		else {
+			z->prev->next = z->next;
+			z->next->prev = z->prev;
 			if (zchild) {                           
 				FibNode *temp = zchild->prev;
 				z = zchild;
 				z->prev = zprev;
+				zprev->next = z;
 				if (temp == zchild) {               //only one child
 					z->next = znext;
+					znext->prev = z;
 				}
 				else {
 					temp->next = znext;
+					znext->prev = temp;
 				}
 			}
 			else {                                   //no child
-				z->prev->next = z->next;
-				z->next->prev = z->prev;
+				
 				if (z == head) head = z->next;
 				if (z == tail) tail = z->prev;
 				head->prev = tail;
@@ -162,7 +168,7 @@ FibNode *FibHeap::ExtractMin() {
 		}
 		
 		if (z == z->next) {
-			Min = nullptr;
+			Min = z;
 		}
 		else {
 			Min = z->next;

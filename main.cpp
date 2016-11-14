@@ -15,6 +15,10 @@ int main() {
 		temp = temp->getnext();
 	}
 	testHeap.display(temp);
+	printf("\n");
+	Min = testHeap.ExtractMin();
+	temp = Min;
+	testHeap.display(temp);
 	system("pause");
 	return 0;
 }
