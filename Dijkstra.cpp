@@ -105,7 +105,7 @@ int main() {
     if(myfile)
     {
         while (getline(myfile,list)) {
-            cout << list << endl;
+            //cout << list << endl;
             if (list.length() > 2) {
                 head = list.substr(0, list.find("->"));
                 wordList.push_back(head);
@@ -120,7 +120,7 @@ int main() {
                     }
                     wordWeight.first = node.substr(0, node.find(","));
                     wordWeight.second = atoi(node.erase(0, node.find(",")+1).c_str());
-                    cout << "weightWord.first = " << wordWeight.first << " weightWord.second = "<< wordWeight.second << endl;
+                    //cout << "weightWord.first = " << wordWeight.first << " weightWord.second = "<< wordWeight.second << endl;
                     adjacencyList[head].push_back(wordWeight);
                 }
             }
@@ -134,6 +134,6 @@ int main() {
     myfile.close();
     int test = Dijkstra(adjacencyList,wordList,"cords","woods");
 
-    cout << test << endl;
+    //cout << test << endl;
     return 0;
 }
