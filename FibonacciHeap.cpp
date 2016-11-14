@@ -1,4 +1,5 @@
 #include"FibonacciHeap.h"
+//comment
 void FibHeap::insert(type key) {
 	FibNode *newnode = new FibNode(key);
 	if (!head) {                           //heap  is empty;
