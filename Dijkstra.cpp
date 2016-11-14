@@ -41,7 +41,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         if(start.compare(wordList[i]) == true){//our starting point
             dist[wordList[i]] = 0; // the distance from starting point to itself is zero
             pq.insert(make_pair(wordList[i], 0));//add the starting point to our pq
-            visited.insert(start);//set the start point to be visited
         }else{
             dist[wordList[i]] = numeric_limits<int>::max();
             //adding each node to the pq, each weight is max_int
@@ -55,7 +54,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     while(!pq.empty()){
         string current = pq.begin() -> first;
         pq.erase(pq.begin());//pops out the smallest item
-        for(int j = 0; j < adjacencyList[current]; j ++){
+        for(int j = 0; j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
             tmp = make_pair(neighbour, dist[neighbour]);
             const bool is_in = visited.find(neighbour) != visited.end();
@@ -118,26 +117,6 @@ int main() {
         return -1;
     }
     myfile.close();
-
-    // Printing adjacency List and the weights
-    /*for (auto a: adjacencyList_words) {
-        cout << "head = " << a.first << ":";
-        for (auto w: a.second) {
-            cout << w << "->";
-        }
-        cout << endl;
-    }
-
-    cout << endl;
-
-    for (auto a: adjacencyList_weights) {
-        cout << "head = " << a.first << ":";
-        for (auto w: a.second) {
-            cout << w << "->";
-        }
-        cout << endl;
-    }*/
-
     int test = Dijkstra(adjacencyList,wordList,"cords","woods");
 
 
