@@ -134,8 +134,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int test = Dijkstra(adjacencyList,wordList,"cords","woods");
-
-    //cout << test << endl;
+    int distance = Dijkstra(adjacencyList,wordList,"cords","woods");
+    cout << distance << endl;
     return 0;
 }
