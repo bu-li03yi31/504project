@@ -14,8 +14,8 @@
 #include <set>
 using namespace std;
 
-//created by Yi Li 2016 fall
-//modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
+//Created by Yi Li 2016 fall
+//Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         , vector<string>& wordList, string start, string stop){
     /* ****** initializing everything ***** */
