@@ -83,7 +83,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     string path = stop;
     path += "<-";
     string s = stop;
-    while(s.compare(start) != 0){
+    while(s.compare(start) != 0 || s.compare("*") != 0){
         path = path + prev[s];
         if(prev[s].compare(start) != 0){
             path = path + "<-";
