@@ -1,6 +1,7 @@
 #ifndef FIBONACCIHEAP_H
 #define FIBONACCIHEAP_H
 #include<iostream>
+#include<vector>
 #define type int 
 using namespace std;
 
@@ -13,9 +14,12 @@ public:
 	FibNode *next;
 	FibNode *child;
 	bool marked;
-	FibNode(type data) :key(data), degree(0), parent(NULL), prev(NULL), next(NULL), marked(false) {}
+	FibNode(type data) :key(data), degree(0), parent(NULL), prev(NULL), next(NULL), marked(false), child(NULL){}
 	FibNode* getnext() {
 		return this->next;
+	}
+	FibNode* getchild() {
+		return this->child;
 	}
 };
 
@@ -33,9 +37,18 @@ public:
 	//~FibHeap();
 	void insert(type key);
 	FibNode *ExtractMin();
-	FibNode* Consolidate(FibNode *z);
+	//FibNode* Consolidate(FibNode* &z);
 	void unmarkandunparent(FibNode* node);
-	void display(FibNode *node);
+	FibNode * Consolidate(FibNode * z);
+	void display(FibNode *node, vector<vector<type>>& res, int line);
+	void DecreaseKey(FibNode *node, type k);
+	FibNode* cut(FibNode *x, FibNode *y);
+	FibNode* CascadingCut(FibNode *y);
+	FibNode* getMin(){
+		return this->Min;
+	}
+	FibNode* search(type key);
+	FibNode* SearchHelper(type key, FibNode* z);
 };
 
 #endif

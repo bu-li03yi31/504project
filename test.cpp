@@ -8,6 +8,7 @@ int main() {
 		type key = array[i];
 		testHeap.insert(key);
 	}
+	printf("/n");
 	FibNode* Min = testHeap.ExtractMin();
 	FibNode* temp = Min->getnext();
 	while (temp != Min) {
@@ -15,7 +16,7 @@ int main() {
 		temp = temp->getnext();
 	}
 	testHeap.display(temp);
-	printf("\n");
+	printf("/n");
 	Min = testHeap.ExtractMin();
 	temp = Min->getnext();
 	while (temp != Min) {

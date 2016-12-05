@@ -38,16 +38,13 @@ void FibHeap::unmarkandunparent(FibNode* node) {
 	return;
 }
 
-FibNode *FibHeap::Consolidate(FibNode *z) {
-	FibNode *A[64];
-	for (int i = 0; i < 64; i++) {
-		A[i] = NULL;
-	}
+FibNode *FibHeap::Consolidate(FibNode* z) {
+	vector<FibNode* > A(64, NULL);
 	int i = 0;
 	//FibNode *w = head;
-	FibNode *x;
+//	FibNode *x;
 	FibNode *t;
-	FibNode *y;
+//	FibNode *y;
 	//FibNode *temp = w;
 	//int d;
 	while (true) {
@@ -172,26 +169,116 @@ FibNode *FibHeap::ExtractMin() {
 		}
 		else {
 			Min = z->next;
-			Min = Consolidate(z->next);
+			Min = Consolidate(z->next);            //z->next will not change, but attributes in z->next will change
 		}
 		NodeNum--;
 		return Min;
 	}
+	return Min;
 }
 
-void FibHeap::display(FibNode* node) {
+void FibHeap::display(FibNode* node, vector<vector<type>>& res, int line) {
 	if (node == NULL) return;
 	
-	printf("%d ", node->key);
+	//printf("%d ", node->key);
+	vector<type> temp;
+	if (line != 0) {
+		vector<type> tmp(res[0].size(), 0);
+		temp = tmp;
+	}
+	if(res.size() <= line) res.push_back(temp);
+	for (int i = 0; i < res.size(); i++) {
+		if(i != line) res[i].push_back(0);
+	}
+	res[line].push_back(node->key);
 	if (node->child) {
-		FibNode* temp = node->child;
-		printf("(");
+		FibNode* t = node->child;
+		//printf("(");
 		for (int i = 0; i < node->degree; i++) {
-			//printf("%d,", temp->key);
-			display(temp);
-			temp = temp->next;
+			display(t, res, line + 1);
+			t = t->next;
 		}
-		printf("\b) ");
+		//printf("\b) ");
 	}
 	
+}
+
+
+void FibHeap::DecreaseKey(FibNode *node, type k) {
+	if (k > node->key) {
+		printf("new key is greater than current key");
+		return;
+	}
+	node->key = k;
+	FibNode *y = node->parent;              //y : parent of x
+	if (y != NULL && node->key < y->key) {
+		cut(node, y);
+		CascadingCut(y);
+	}
+	if (node->key < Min->key) {
+		Min = node;
+	}
+}
+
+FibNode* FibHeap::cut(FibNode *x, FibNode *y) {
+	FibNode *MinNext = Min->next;
+	/*remove x from the child list of y, decrementing y degree*/
+	//y has only one child
+	if (x->next == x) {
+		y->child = NULL;
+	}
+	else {
+		FibNode *xprev = x->prev;
+		FibNode *xnext = x->next;
+		xprev->next = xnext;
+		xnext->prev = xprev;
+		if (y->child == x) y->child = xnext;              //if x is y's child, let xnext be y's child
+	}
+	y->degree -= 1;
+	Min->next = x;
+	x->prev = Min;
+	x->next = MinNext;
+	MinNext->prev = x;
+	x->parent = NULL;
+	x->marked = false;
+	return Min;
+}
+
+FibNode* FibHeap::CascadingCut(FibNode *y) {
+	FibNode *z = y->parent;
+	if (z) {
+		if (y->marked == false) {
+			y->marked = true;
+		}
+		else {
+			cut(y, z);
+			CascadingCut(z);
+		}
+	}
+	return Min;
+}
+
+FibNode* FibHeap::search(type key) {
+	FibNode* temp = Min->getnext();
+	while (temp != Min) {
+		FibNode* tmp = SearchHelper(key, temp);
+		if (tmp) {
+			return tmp;
+		}
+		temp = temp->getnext();
+	}
+	return SearchHelper(key, temp);
+}
+
+FibNode* FibHeap::SearchHelper(type key, FibNode* z) {
+	if (z->key == key) {
+		return z;
+	}
+	FibNode* child = z->child;
+	for (int i = 0; i < z->degree; i++) {
+		FibNode* target = SearchHelper(key, child);
+		if (target != NULL) return target;
+		child = child->next;
+	}
+	return NULL;
 }
