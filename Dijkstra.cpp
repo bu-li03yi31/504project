@@ -78,17 +78,17 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
             }
         }
     }
-
     /* ***** print out the shortest path and returns the value ***** */
     string path = stop;
     path += "<-";
     string s = stop;
-    while(s.compare(start) != 0 || s.compare("*") != 0){
+    while(s.compare(start) != 0){
         path = path + prev[s];
         if(prev[s].compare(start) != 0 && prev[s].compare("*") != 0){
             path = path + "<-";
         }
         s = prev[s];
+        cout << s << endl;
     }
     cout << path << endl;
     //return the path sum of the ending point
@@ -103,7 +103,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/4-words4_graph.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -134,7 +134,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"cords","woods");
+    int distance = Dijkstra(adjacencyList,wordList,"worms","cords");
     cout << distance << endl;
     return 0;
 }
