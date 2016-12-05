@@ -144,6 +144,7 @@ FibNode *FibHeap::ExtractMin() {
 			if (zchild) {                           
 				FibNode *temp = zchild->prev;
 				z = zchild;
+				//break the loop in the children list then move all children up to the root list
 				z->prev = zprev;
 				zprev->next = z;
 				if (temp == zchild) {               //only one child
@@ -202,7 +203,6 @@ void FibHeap::display(FibNode* node, vector<vector<type>>& res, int line) {
 	}
 	
 }
-
 
 void FibHeap::DecreaseKey(FibNode *node, type k) {
 	if (k > node->key) {

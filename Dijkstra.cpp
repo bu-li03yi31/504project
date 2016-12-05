@@ -14,7 +14,8 @@
 #include <set>
 using namespace std;
 
-
+//Created by Yi Li 2016 fall
+//Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         , vector<string>& wordList, string start, string stop){
     /* ****** initializing everything ***** */
@@ -82,9 +83,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     string path = stop;
     path += "<-";
     string s = stop;
-    while(s.compare(start) != 0){
+    while(s.compare(start) != 0 || s.compare("*") != 0){
         path = path + prev[s];
-        if(prev[s].compare(start) != 0){
+        if(prev[s].compare(start) != 0 && prev[s].compare("*") != 0){
             path = path + "<-";
         }
         s = prev[s];
