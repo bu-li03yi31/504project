@@ -74,9 +74,10 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
                     pq.erase(tmp);
                     pq.insert(make_pair(neighbour, dist[neighbour]));
                 }
-                visited.insert(adjacencyList[current][j].first);//set current node to be visited
+                //visited.insert(adjacencyList[current][j].first);//set current node to be visited
             }
         }
+        visited.insert(current);//set current node to be visited
     }
     /* ***** print out the shortest path and returns the value ***** */
     string path = stop;
@@ -134,7 +135,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"cords","graph");
+    int distance = Dijkstra(adjacencyList,wordList,"worms","black");
     cout << distance << endl;
     return 0;
 }
