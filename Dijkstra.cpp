@@ -43,7 +43,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     //initialize our pq by using customized comparator
     set<pair<string, int>, QComparator> pq;
     for(int i = 0; i < wordList.size(); i++){
-        if(start.compare(wordList[i]) == 0){//our starting point
+        if(start.compare(wordList[i]) == 0){//starting point
             dist[wordList[i]] = 0; // the distance from starting point to itself is zero
             pq.insert(make_pair(wordList[i], 0));//add the starting point to our pq
         }else{
@@ -58,8 +58,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     pair<string, int> tmp;// a buffer to store node
     while(!pq.empty()){
         string current = pq.begin() -> first;
+        //cout << current << endl;
         pq.erase(pq.begin());//pops out the smallest item
-        for(int j = 0; j < adjacencyList[current].size(); j ++){
+        for(int j = 0; dist[current] != numeric_limits<int>::max() && j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
             tmp = make_pair(neighbour, dist[neighbour]);
             const bool is_in = visited.find(neighbour) != visited.end();
@@ -87,8 +88,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         if(prev[s].compare(start) != 0 && prev[s].compare("*") != 0){
             path = path + "<-";
         }
-        s = prev[s];
-        cout << s << endl;
+        string previous = prev[s];
+        s = previous;
+        if(previous.compare("*") == 0) break;
     }
     cout << path << endl;
     //return the path sum of the ending point
@@ -103,7 +105,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/4-words4_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -122,7 +124,6 @@ int main() {
                     }
                     wordWeight.first = node.substr(0, node.find(","));
                     wordWeight.second = atoi(node.erase(0, node.find(",")+1).c_str());
-                    //cout << "weightWord.first = " << wordWeight.first << " weightWord.second = "<< wordWeight.second << endl;
                     adjacencyList[head].push_back(wordWeight);
                 }
             }
@@ -134,7 +135,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"worms","cords");
+    int distance = Dijkstra(adjacencyList,wordList,"cords","jokes");
     cout << distance << endl;
     return 0;
 }
