@@ -105,7 +105,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/4-words4_graph.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -135,7 +135,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"cords","jokes");
+    int distance = Dijkstra(adjacencyList,wordList,"cords","graph");
     cout << distance << endl;
     return 0;
 }
