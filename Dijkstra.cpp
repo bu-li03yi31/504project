@@ -74,7 +74,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
                     pq.erase(tmp);
                     pq.insert(make_pair(neighbour, dist[neighbour]));
                 }
-                //visited.insert(adjacencyList[current][j].first);//set current node to be visited
             }
         }
         visited.insert(current);//set current node to be visited
@@ -109,7 +108,6 @@ int main() {
     if(myfile)
     {
         while (getline(myfile,list)) {
-            //cout << list << endl;
             if (list.length() > 2) {
                 head = list.substr(0, list.find("->"));
                 wordList.push_back(head);
