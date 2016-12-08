@@ -58,7 +58,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     pair<string, int> tmp;// a buffer to store node
     while(!pq.empty()){
         string current = pq.begin() -> first;
-        //cout << current << endl;
         pq.erase(pq.begin());//pops out the smallest item
         for(int j = 0; dist[current] != numeric_limits<int>::max() && j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
