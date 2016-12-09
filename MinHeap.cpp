@@ -142,5 +142,37 @@ int main() {
     cout << test6.second << " ";
     cout << "--heap size equals: ";
     cout << h.getSize() << " ";
+    // test corner cases
+    MinHeap h2(3);
+    h2.insertKey("words",3);
+    h2.decreaseKeyByWord("words", 2);
+    h2.insertKey("cords",4);
+    h2.insertKey("lords",15);
+    h2.insertKey("bords",6);
+    h2.decreaseKeyByWord("bords", 1);
+    pair<string, int> test21 = h2.extractMin();
+    pair<string, int> test22 = h2.extractMin();
+    pair<string, int> test23 = h2.extractMin();
+    pair<string, int> test24 = h2.extractMin();
+    pair<string, int> test25 = h2.extractMin();
+    cout << test21.first << "=";
+    cout << test21.second << " ";
+    cout << test22.first << "=";
+    cout << test22.second << " ";
+    cout << test23.first << "=";
+    cout << test23.second << " ";
+    cout << test24.first << "=";
+    cout << test24.second << " ";
+    cout << test25.first << "=";
+    cout << test25.second << " ";
+    cout << "--heap size equals: ";
+    cout << h2.getSize() << endl;
+
+    MinHeap h3(5);
+    pair<string, int> test31 = h3.extractMin();
+    cout << test31.first << "=";
+    cout << test31.second << " ";
+    cout << "--heap size equals: ";
+    cout << h2.getSize() << endl;
     return 0;
 }
