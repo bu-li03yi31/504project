@@ -25,6 +25,8 @@ public:
 
     int parent(int i) { return (i-1)/2; }
 
+    int getSize() { return heap_size; }
+
     // to get index of left child of node at index i
     int left(int i) { return (2*i + 1); }
 
