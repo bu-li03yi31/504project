@@ -110,7 +110,6 @@ void swapWords(string *left, string *right)
     *right = temp;
 }
 
-
 // Driver program to test above functions
 int main()
 {

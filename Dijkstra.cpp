@@ -30,17 +30,13 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
         {
-            if(left.second == right.second){
-                return left.first.compare(right.first) != 0;
-            }else{
-                return left.second < right.second;
-            }
+            if(left.second == right.second) return left.first.compare(right.first) != 0;
+            else return left.second < right.second;
         }
     };
-    //initialize the visited set
-    //to store the visited nodes later
+    //initialize the visited set to store the visited nodes
     unordered_set<string> visited;
-    //initialize our pq by using customized comparator
+    //initialize pq by using customized comparator
     set<pair<string, int>, QComparator> pq;
     for(int i = 0; i < wordList.size(); i++){
         if(start.compare(wordList[i]) == 0){//starting point
