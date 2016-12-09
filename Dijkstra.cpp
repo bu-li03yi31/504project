@@ -133,7 +133,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"worms","black");
+    int distance = Dijkstra(adjacencyList,wordList,"graph","lords");
     cout << distance << endl;
     return 0;
 }
