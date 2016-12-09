@@ -8,7 +8,7 @@
 #include "MinHeap.h"
 #include <time.h>
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_min_heap_output.txt");
+ofstream out("/Users/yil/Desktop/504-project-repo/504project/5_53_graph_min_heap_output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -89,7 +89,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile("/Users/sunmin/Desktop/EC504/CLion/504project/5-words53_graph.txt");
+    ifstream myfile("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
