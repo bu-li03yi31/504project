@@ -6,8 +6,9 @@
 #include <unordered_set>
 #include"FibonacciHeap.h"
 #include "MinHeap.h"
+#include <time.h>
 using namespace std;
-ofstream out("/Users/yil/Desktop/504-project-repo/504project/5_53_graph_min_heap_output.txt");
+ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_min_heap_output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -88,7 +89,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
+    ifstream myfile("/Users/sunmin/Desktop/EC504/CLion/504project/5-words53_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -118,12 +119,16 @@ int main() {
     }
     myfile.close();
     int count = 0;
+    time_t start, end;
+    start = time(NULL);
 	for (int i = 0; i < wordList.size(); i++) {
 		for (int j = i + 1; j < wordList.size(); j++) {
             count ++;
 				int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
 		}
 	}
-    
+    end = time(NULL);
+    cout << "total running time = " << difftime(end, start) << endl;
+    cout << "average running time = " << difftime(end, start)/count << endl;
     return 0;
 }
