@@ -1,5 +1,5 @@
 #include "MinHeap.h"
-// Constructor: Builds a heap from a given array a[] of given size
+//Builds a heap from a given array a[] of given size
 MinHeap::MinHeap(int cap)
 {
     heap_size = 0;
