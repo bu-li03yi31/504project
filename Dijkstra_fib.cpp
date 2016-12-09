@@ -6,7 +6,7 @@
 #include <unordered_set>
 #include"FibonacciHeap.h"
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/Clion/504project/fib-output.txt");
+ofstream out("/Users/yil/Desktop/504-project-repo/504project/fib-output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -73,7 +73,8 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         s = previous;
         if(previous.compare("*") == 0) break;
     }
-	
+    path = path + " " + to_string(dist[stop]);
+    out << start + " to " + stop << ": ";
 	out << path << endl << "\n";
     //return the path sum of the ending point
     return dist[stop];
@@ -119,7 +120,6 @@ int main() {
 	for (int i = 0; i < wordList.size(); i++) {
 		for (int j = i + 1; j < wordList.size(); j++) {
 				int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
-				
 		}
 	}
     
