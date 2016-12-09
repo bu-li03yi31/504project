@@ -1,40 +1,12 @@
 
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 #include <fstream>
-#include <string.h>
 #include <vector>
 #include <map>
-#include <tuple>
-#include <utility>
-#include <limits>
 #include <unordered_set>
-#include <set>
-#include<string>
-#include<iomanip>
 #include"FibonacciHeap.h"
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/Clion/504project/output.txt");
-/*void display(FibHeap testHeap, vector < vector<int> >res) {
-	FibNode *temp = testHeap.getMin()->getnext();
-	while (temp != testHeap.getMin()) {
-		testHeap.display(temp, res, 0);
-		temp = temp->getnext();
-	}
-	testHeap.display(temp, res, 0);
-	for (int i = 0; i < res.size(); i++) {
-		for (int j = 0; j < res[i].size(); j++) {
-			if (res[i][j] == 0) cout << setw(5) << "";
-			//else printf("%d ", res[i][j]);
-			else cout << setw(5) << res[i][j];
-		}
-		printf("\n");
-	}
-	printf("\n");
-}*/
-
+ofstream out("/Users/sunmin/Desktop/EC504/Clion/504project/fib-output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -45,25 +17,11 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     map<string, int> dist;
     //store parent of each node
     map<string, string> prev;
-    //our priority queue here
 
-    //overriding the comparator of pair pq
-    /*struct QComparator
-    {
-        bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
-        {
-            if(left.second == right.second){
-                return left.first.compare(right.first) != 0;
-            }else{
-                return left.second < right.second;
-            }
-        }
-    };*/
     //initialize the visited set
     //to store the visited nodes later
     unordered_set<string> visited;
-    //initialize our pq by using customized comparator
-    //set<pair<string, int>, QComparator> pq;
+    //initialize fib-pq
     FibHeap Fib_pq = FibHeap();
     for(int i = 0; i < wordList.size(); i++){
         if(start.compare(wordList[i]) == 0){//starting point
@@ -81,13 +39,10 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     pair<string, int> tmp;// a buffer to store node
 	FibNode *temp = Fib_pq.getMin();
     while(Fib_pq.getMin()){
-        //string current = pq.begin() -> first;
-        //pq.erase(pq.begin());//pops out the smallest item
         string current = Fib_pq.getMin()->word;
         FibNode *Min = Fib_pq.ExtractMin();
 		Fib_pq.setMin(Min);
 		vector<vector<int>> res;
-		//display(Fib_pq, res);
         for(int j = 0; dist[current] != INT_MAX && j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
             tmp = make_pair(neighbour, dist[neighbour]);
@@ -99,9 +54,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
                     dist[neighbour] = adjacencyList[current][j].second + dist[current];
                     prev[neighbour] = current; // update the parent
 
-                    //decrease the key of the neighbour to the latest path sum
-                    //pq.erase(tmp);
-                    //pq.insert(make_pair(neighbour, dist[neighbour]));
                     Fib_pq.DecreaseKey(Fib_pq.search(neighbour), dist[neighbour]);
                 }
             }
@@ -121,7 +73,6 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         s = previous;
         if(previous.compare("*") == 0) break;
     }
-    //cout << path << endl;
 	
 	out << path << endl << "\n";
     //return the path sum of the ending point
