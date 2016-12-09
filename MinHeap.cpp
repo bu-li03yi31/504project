@@ -45,23 +45,25 @@ void MinHeap::decreaseKey(int i, int new_val)
 }
 
 // Method to remove minimum element (or root) from min heap
-int MinHeap::extractMin()
+pair<string,int > MinHeap::extractMin()
 {
     if (heap_size <= 0)
-        return INT_MAX;
+        return make_pair("*", INT_MAX);
     if (heap_size == 1)
     {
         heap_size--;
-        return harr[0];
+        return make_pair(words[0], harr[0]);
     }
 
     // Store the minimum value, and remove it from heap
-    int root = harr[0];
+    int res = harr[0];
+    string resSt = words[0];
     harr[0] = harr[heap_size-1];
+    words[0] = words[heap_size-1];
     heap_size--;
     MinHeapify(0);
 
-    return root;
+    return make_pair(resSt, res);
 }
 
 
@@ -87,6 +89,7 @@ void MinHeap::MinHeapify(int i)
     if (smallest != i)
     {
         swap(&harr[i], &harr[smallest]);
+        swapWords(&words[i], &words[smallest]);
         MinHeapify(smallest);
     }
 }
@@ -114,14 +117,18 @@ int main()
     MinHeap h(11);
     h.insertKey("words",3);
     h.insertKey("cords",2);
-    h.deleteKey(1);
+    //h.deleteKey(1);
     h.insertKey("lords",15);
     h.insertKey("fords",5);
     h.insertKey("bords",4);
     h.insertKey("zords",45);
-    cout << h.extractMin() << " ";
-    cout << h.getMin() << " ";
-    h.decreaseKey(2, 1);
-    cout << h.getMin();
+    pair<string, int> test1 = h.extractMin();
+    cout << test1.first << " ";
+    cout << test1.second << " ";
+    cout << h.getMin().first << " ";
+    cout << h.getMin().second << " ";
+    //h.decreaseKey(2, 1);
+    //cout << h.getMin().first;
+    //cout << h.getMin().second;
     return 0;
 }

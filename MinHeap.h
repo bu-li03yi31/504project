@@ -30,13 +30,13 @@ public:
     int right(int i) { return (2*i + 2); }
 
     // to extract the root which is the minimum element
-    int extractMin();
+    pair<string,int > extractMin();
 
     // Decreases key value of key at index i to new_val
     void decreaseKey(int i, int new_val);
 
     // Returns the minimum key (key at root) from min heap
-    int getMin() { return harr[0]; }
+    pair<string,int > getMin() { return make_pair(words[0], harr[0]); }
 
     // Deletes a key stored at index i
     void deleteKey(int i);
