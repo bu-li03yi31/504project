@@ -18,7 +18,7 @@ using namespace std;
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         , vector<string>& wordList, string start, string stop){
-    /* ****** initializing everything ***** */
+    /* ******  ***** */
     //store path sum of each node
     map<string, int> dist;
     //store parent of each node

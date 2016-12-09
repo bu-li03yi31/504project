@@ -1,6 +1,7 @@
 // A C++ program to demonstrate common Binary Heap Operations
 #include<iostream>
 #include<climits>
+#include <map>
 using namespace std;
 
 // Prototype of a utility function to swap two integers
@@ -10,6 +11,7 @@ void swapWords(string *left, string *right);
 // A class for Min Heap
 class MinHeap
 {
+    map<string, int> wordsPostions;
     string *words; // pointer to array of elements in heap
     int *harr; // pointer to array of elements in heap
     int capacity; // maximum possible size of min heap

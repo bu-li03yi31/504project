@@ -21,6 +21,8 @@ void MinHeap::MinHeapify(int i)
         smallest = r;
     if (smallest != i)
     {
+        wordsPostions[words[smallest]] = i;
+        wordsPostions[words[i]] = smallest;
         swap(&harr[i], &harr[smallest]);
         swapWords(&words[i], &words[smallest]);
         MinHeapify(smallest);
@@ -41,6 +43,7 @@ pair<string,int > MinHeap::extractMin()
     // Store the minimum value, and remove it from heap
     int res = harr[0];
     string resSt = words[0];
+    wordsPostions.erase(resSt);//delete from the map
     harr[0] = harr[heap_size-1];
     words[0] = words[heap_size-1];
     heap_size--;
@@ -63,10 +66,13 @@ void MinHeap::insertKey(string word, int k)
     int i = heap_size - 1;
     harr[i] = k;
     words[i] = word;
+    wordsPostions[word] = i;
 
     // Fix the min heap property if it is violated
     while (i != 0 && harr[parent(i)] > harr[i])
     {
+        wordsPostions[words[i]] = parent(i);
+        wordsPostions[words[parent(i)]] = i;
         swap(&harr[i], &harr[parent(i)]);
         swapWords(&words[i], &words[parent(i)]);
         i = parent(i);
@@ -80,6 +86,8 @@ void MinHeap::decreaseKey(int i, int new_val)
     harr[i] = new_val;
     while (i != 0 && harr[parent(i)] > harr[i])
     {
+        wordsPostions[words[i]] = parent(i);
+        wordsPostions[words[parent(i)]] = i;
         swap(&harr[i], &harr[parent(i)]);
         swapWords(&words[i], &words[parent(i)]);
         i = parent(i);
