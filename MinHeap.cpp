@@ -112,7 +112,7 @@ void swapWords(string *left, string *right) {
 }
 
 // Driver program to test above functions
-int main() {
+/*int main() {
     MinHeap h(11);
     h.insertKey("words",3);
     h.decreaseKeyByWord("words", 2);
@@ -175,4 +175,4 @@ int main() {
     cout << "--heap size equals: ";
     cout << h2.getSize() << endl;
     return 0;
-}
+}*/

@@ -117,13 +117,11 @@ int main() {
     }
     myfile.close();
 	for (int i = 0; i < wordList.size(); i++) {
-		for (int j = 0; j < wordList.size(); j++) {
-			if (i != j) {
+		for (int j = i + 1; j < wordList.size(); j++) {
 				int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
 				
 				//cout << distance << endl;
 				//out << distance;
-			}
 		}
 	}
     
