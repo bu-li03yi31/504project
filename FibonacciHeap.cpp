@@ -1,6 +1,6 @@
 #include"FibonacciHeap.h"
-void FibHeap::insert(type key) {
-	FibNode *newnode = new FibNode(key);
+void FibHeap::insert(type key, string word) {
+	FibNode *newnode = new FibNode(key, word);
 	if (!head) {                           //heap  is empty;
 		head = newnode;
 		tail = newnode;
@@ -119,7 +119,7 @@ FibNode *FibHeap::Consolidate(FibNode* z) {
 	FibNode *min = z;
 	FibNode *ztemp = z->next;
 	while (ztemp != z) {
-		if (z->key < min->key) min = ztemp;
+		if (ztemp->key < min->key) min = ztemp;
 		ztemp = ztemp->next;
 	}
 	if (ztemp->key < min->key) min = ztemp;
@@ -156,24 +156,30 @@ FibNode *FibHeap::ExtractMin() {
 					znext->prev = temp;
 				}
 			}
-			else {                                   //no child
+			/*else {                                   //no child
 				
 				if (z == head) head = z->next;
 				if (z == tail) tail = z->prev;
 				head->prev = tail;
 				tail->next = head;
-			}
+			}*/
 		}
 		
-		if (z == z->next) {
-			Min = z;
+		if (z != NULL) {
+			if (z == z->next) {
+				Min = z;
+			}
+			else {
+				Min = z->next;
+				Min = Consolidate(z->next);            //z->next will not change, but attributes in z->next will change
+			}
+			NodeNum--;
+			return Min;
 		}
 		else {
-			Min = z->next;
-			Min = Consolidate(z->next);            //z->next will not change, but attributes in z->next will change
+			Min = NULL;
+			//return Min;
 		}
-		NodeNum--;
-		return Min;
 	}
 	return Min;
 }
@@ -258,7 +264,7 @@ FibNode* FibHeap::CascadingCut(FibNode *y) {
 	return Min;
 }
 
-FibNode* FibHeap::search(type key) {
+FibNode* FibHeap::search(string key) {
 	FibNode* temp = Min->getnext();
 	while (temp != Min) {
 		FibNode* tmp = SearchHelper(key, temp);
@@ -270,8 +276,8 @@ FibNode* FibHeap::search(type key) {
 	return SearchHelper(key, temp);
 }
 
-FibNode* FibHeap::SearchHelper(type key, FibNode* z) {
-	if (z->key == key) {
+FibNode* FibHeap::SearchHelper(string key, FibNode* z) {
+	if (z->word.compare(key) == 0) {
 		return z;
 	}
 	FibNode* child = z->child;

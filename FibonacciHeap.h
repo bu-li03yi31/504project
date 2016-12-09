@@ -8,13 +8,14 @@ using namespace std;
 class FibNode {
 public:
 	type key;
+    string word;
 	int degree;
 	FibNode *parent;
 	FibNode *prev;
 	FibNode *next;
 	FibNode *child;
 	bool marked;
-	FibNode(type data) :key(data), degree(0), parent(NULL), prev(NULL), next(NULL), marked(false), child(NULL){}
+	FibNode(type data, string name) : word(name), key(data), degree(0), parent(NULL), prev(NULL), next(NULL), marked(false), child(NULL){}
 	FibNode* getnext() {
 		return this->next;
 	}
@@ -35,7 +36,7 @@ private:
 public:
 	FibHeap() :NodeNum(0), MaxDegree(0), Min(NULL), head(NULL), tail(NULL) {}
 	//~FibHeap();
-	void insert(type key);
+	void insert(type key, string word);
 	FibNode *ExtractMin();
 	//FibNode* Consolidate(FibNode* &z);
 	void unmarkandunparent(FibNode* node);
@@ -47,8 +48,11 @@ public:
 	FibNode* getMin(){
 		return this->Min;
 	}
-	FibNode* search(type key);
-	FibNode* SearchHelper(type key, FibNode* z);
+	FibNode* search(string key);
+	FibNode* SearchHelper(string key, FibNode* z);
+	void setMin(FibNode *min) {
+		Min = min;
+	}
 };
 
 #endif

@@ -103,7 +103,6 @@ int main() {
     map<string, vector<pair<string,int >> > adjacencyList;
     vector<string> wordList;
     pair< string, int> wordWeight;
-
     ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
     if(myfile)
     {
