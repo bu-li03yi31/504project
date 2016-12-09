@@ -5,8 +5,9 @@
 #include <map>
 #include <unordered_set>
 #include"FibonacciHeap.h"
+#include "MinHeap.h"
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/Clion/504project/fib-output.txt");
+ofstream out("/Users/yil/Desktop/504-project-repo/504project/5_53_graph_min_heap_output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -21,31 +22,30 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     //initialize the visited set
     //to store the visited nodes later
     unordered_set<string> visited;
-    //initialize fib-pq
-    FibHeap Fib_pq = FibHeap();
+    //initialize minHeap-pq
+    MinHeap mh_pq(wordList.size());
     for(int i = 0; i < wordList.size(); i++){
         if(start.compare(wordList[i]) == 0){//starting point
             dist[wordList[i]] = 0; // the distance from starting point to itself is zero
-            Fib_pq.insert(0, wordList[i]);//add the starting point to our pq
+            //add the starting point to our pq
+            mh_pq.insertKey(wordList[i], 0);
         }else{
             dist[wordList[i]] = INT_MAX;
             //adding each node to the pq, each weight is max_int
-            Fib_pq.insert(INT_MAX, wordList[i]);
+            mh_pq.insertKey(wordList[i], INT_MAX);
         }
         prev[wordList[i]] = "*";//parent of each node is always null initially
     }
 	
     /* ****** tracing every path ***** */
     pair<string, int> tmp;// a buffer to store node
-	FibNode *temp = Fib_pq.getMin();
-    while(Fib_pq.getMin()){
-        string current = Fib_pq.getMin()->word;
-        FibNode *Min = Fib_pq.ExtractMin();
-		Fib_pq.setMin(Min);
+    while(mh_pq.getSize() != 0){
+        //extract min
+        string current = mh_pq.extractMin().first;
+
 		vector<vector<int>> res;
         for(int j = 0; dist[current] != INT_MAX && j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
-            tmp = make_pair(neighbour, dist[neighbour]);
             const bool is_in = visited.find(neighbour) != visited.end();
             if(!is_in){//if this neighbour has never been visited
                 //adjacencyList[current][j].second is the weight between neighbour and current
@@ -54,7 +54,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
                     dist[neighbour] = adjacencyList[current][j].second + dist[current];
                     prev[neighbour] = current; // update the parent
 
-                    Fib_pq.DecreaseKey(Fib_pq.search(neighbour), dist[neighbour]);
+                    mh_pq.decreaseKeyByWord(neighbour, dist[neighbour]);
                 }
             }
         }

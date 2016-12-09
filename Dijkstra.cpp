@@ -43,9 +43,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
             dist[wordList[i]] = 0; // the distance from starting point to itself is zero
             pq.insert(make_pair(wordList[i], 0));//add the starting point to our pq
         }else{
-            dist[wordList[i]] = numeric_limits<int>::max();
+            dist[wordList[i]] = INT_MAX;
             //adding each node to the pq, each weight is max_int
-            pq.insert(make_pair(wordList[i], numeric_limits<int>::max()));
+            pq.insert(make_pair(wordList[i], INT_MAX));
         }
         prev[wordList[i]] = "*";//parent of each node is always null initially
     }
@@ -55,7 +55,7 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     while(!pq.empty()){
         string current = pq.begin() -> first;
         pq.erase(pq.begin());//pops out the smallest item
-        for(int j = 0; dist[current] != numeric_limits<int>::max() && j < adjacencyList[current].size(); j ++){
+        for(int j = 0; dist[current] != INT_MAX && j < adjacencyList[current].size(); j ++){
             string neighbour = adjacencyList[current][j].first;
             tmp = make_pair(neighbour, dist[neighbour]);
             const bool is_in = visited.find(neighbour) != visited.end();
