@@ -123,12 +123,12 @@ int main()
     h.insertKey("zords",45);
     pair<string, int> test1 = h.extractMin();
     pair<string, int> test2 = h.getMin();
-    cout << test1.first << " ";
+    cout << test1.first << "+";
     cout << test1.second << " ";
-    cout << test2.first << " ";
+    cout << test2.first << "+";
     cout << test2.second << " ";
     h.decreaseKey(2, 1);
-    cout << h.getMin().first;
-    cout << h.getMin().second;
+    cout << h.getMin().first << "+";
+    cout << h.getMin().second << " ";
     return 0;
 }
