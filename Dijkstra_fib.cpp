@@ -88,7 +88,7 @@ int main() {
     vector<string> wordList;
     pair< string, int> wordWeight;
 
-    ifstream myfile("/Users/yil/Desktop/504-project-repo/504project/5-words53_graph.txt");
+    ifstream myfile("/Users/yil/Desktop/504-project-repo/504project/5-words4497_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -120,8 +120,8 @@ int main() {
     int count = 0;
 	for (int i = 0; i < wordList.size(); i++) {
 		for (int j = i + 1; j < wordList.size(); j++) {
-                count ++;
-				int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
+            count ++;
+            int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
 		}
 	}
     
