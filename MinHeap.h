@@ -38,7 +38,7 @@ public:
     void decreaseKey(int i, int new_val);
 
     //decreases key by word
-    void decreaseKeyByWord(string word);
+    void decreaseKeyByWord(string word, int val);
 
     // Returns the minimum key (key at root) from min heap
     pair<string,int > getMin() { return make_pair(words[0], harr[0]); }

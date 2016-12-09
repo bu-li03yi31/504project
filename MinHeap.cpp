@@ -69,10 +69,10 @@ void MinHeap::insertKey(string word, int k) {
 }
 
 
-void MinHeap::decreaseKeyByWord(string s){
-    if(wordsPostions.find(s) != wordsPostions.end()){
-        int index = wordsPostions[s];
-        
+void MinHeap::decreaseKeyByWord(string word, int val){
+    if(wordsPostions.find(word) != wordsPostions.end()){
+        int index = wordsPostions[word];
+        decreaseKey(index, val);
     }
 }
 
@@ -115,8 +115,8 @@ void swapWords(string *left, string *right) {
 int main() {
     MinHeap h(11);
     h.insertKey("words",3);
+    h.decreaseKeyByWord("words", 0);
     h.insertKey("cords",2);
-    h.deleteKey(1);
     h.insertKey("lords",15);
     h.insertKey("fords",5);
     h.insertKey("bords",4);
