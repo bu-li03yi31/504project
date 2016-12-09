@@ -140,7 +140,7 @@ int main() {
     cout << test5.second << " ";
     cout << test6.first << "+";
     cout << test6.second << " ";
-    cout << "heap size equals: ";
+    cout << "--heap size equals: ";
     cout << h.getSize() << " ";
     return 0;
 }
