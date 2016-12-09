@@ -117,7 +117,7 @@ int main()
     MinHeap h(11);
     h.insertKey("words",3);
     h.insertKey("cords",2);
-    //h.deleteKey(1);
+    h.deleteKey(1);
     h.insertKey("lords",15);
     h.insertKey("fords",5);
     h.insertKey("bords",4);
@@ -128,8 +128,8 @@ int main()
     cout << test1.second << " ";
     cout << test2.first << " ";
     cout << test2.second << " ";
-    //h.decreaseKey(2, 1);
-    //cout << h.getMin().first;
-    //cout << h.getMin().second;
+    h.decreaseKey(2, 1);
+    cout << h.getMin().first;
+    cout << h.getMin().second;
     return 0;
 }
