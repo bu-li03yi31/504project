@@ -81,11 +81,10 @@ void MinHeap::decreaseKey(int i, int new_val)
     while (i != 0 && harr[parent(i)] > harr[i])
     {
         swap(&harr[i], &harr[parent(i)]);
+        swapWords(&words[i], &words[parent(i)]);
         i = parent(i);
     }
 }
-
-
 
 // This function deletes key at index i. It first reduced value to minus
 // infinite, then calls extractMin()
@@ -94,7 +93,6 @@ void MinHeap::deleteKey(int i)
     decreaseKey(i, INT_MIN);
     extractMin();
 }
-
 
 // A utility function to swap two elements
 void swap(int *x, int *y)
