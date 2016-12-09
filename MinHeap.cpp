@@ -8,6 +8,47 @@ MinHeap::MinHeap(int cap)
     words = new string[cap];
 }
 
+// A recursive method to heapify a subtree with root at given index
+// This method assumes that the subtrees are already heapified
+void MinHeap::MinHeapify(int i)
+{
+    int l = left(i);
+    int r = right(i);
+    int smallest = i;
+    if (l < heap_size && harr[l] < harr[i])
+        smallest = l;
+    if (r < heap_size && harr[r] < harr[smallest])
+        smallest = r;
+    if (smallest != i)
+    {
+        swap(&harr[i], &harr[smallest]);
+        swapWords(&words[i], &words[smallest]);
+        MinHeapify(smallest);
+    }
+}
+
+// Method to remove minimum element (or root) from min heap
+pair<string,int > MinHeap::extractMin()
+{
+    if (heap_size <= 0)
+        return make_pair("*", INT_MAX);
+    if (heap_size == 1)
+    {
+        heap_size--;
+        return make_pair(words[0], harr[0]);
+    }
+
+    // Store the minimum value, and remove it from heap
+    int res = harr[0];
+    string resSt = words[0];
+    harr[0] = harr[heap_size-1];
+    words[0] = words[heap_size-1];
+    heap_size--;
+    MinHeapify(0);
+
+    return make_pair(resSt, res);
+}
+
 // Inserts a new key 'k'
 void MinHeap::insertKey(string word, int k)
 {
@@ -44,27 +85,6 @@ void MinHeap::decreaseKey(int i, int new_val)
     }
 }
 
-// Method to remove minimum element (or root) from min heap
-pair<string,int > MinHeap::extractMin()
-{
-    if (heap_size <= 0)
-        return make_pair("*", INT_MAX);
-    if (heap_size == 1)
-    {
-        heap_size--;
-        return make_pair(words[0], harr[0]);
-    }
-
-    // Store the minimum value, and remove it from heap
-    int res = harr[0];
-    string resSt = words[0];
-    harr[0] = harr[heap_size-1];
-    words[0] = words[heap_size-1];
-    heap_size--;
-    MinHeapify(0);
-
-    return make_pair(resSt, res);
-}
 
 
 // This function deletes key at index i. It first reduced value to minus
@@ -75,24 +95,6 @@ void MinHeap::deleteKey(int i)
     extractMin();
 }
 
-// A recursive method to heapify a subtree with root at given index
-// This method assumes that the subtrees are already heapified
-void MinHeap::MinHeapify(int i)
-{
-    int l = left(i);
-    int r = right(i);
-    int smallest = i;
-    if (l < heap_size && harr[l] < harr[i])
-        smallest = l;
-    if (r < heap_size && harr[r] < harr[smallest])
-        smallest = r;
-    if (smallest != i)
-    {
-        swap(&harr[i], &harr[smallest]);
-        swapWords(&words[i], &words[smallest]);
-        MinHeapify(smallest);
-    }
-}
 
 // A utility function to swap two elements
 void swap(int *x, int *y)
