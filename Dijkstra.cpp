@@ -18,7 +18,7 @@ using namespace std;
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         , vector<string>& wordList, string start, string stop){
-    /* ****** initializing everything ***** */
+    /* ******  ***** */
     //store path sum of each node
     map<string, int> dist;
     //store parent of each node
@@ -30,17 +30,13 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
     {
         bool operator() (const std::pair<string, int>& left, const std::pair<string, int>& right) const
         {
-            if(left.second == right.second){
-                return left.first.compare(right.first) != 0;
-            }else{
-                return left.second < right.second;
-            }
+            if(left.second == right.second) return left.first.compare(right.first) != 0;
+            else return left.second < right.second;
         }
     };
-    //initialize the visited set
-    //to store the visited nodes later
+    //initialize the visited set to store the visited nodes
     unordered_set<string> visited;
-    //initialize our pq by using customized comparator
+    //initialize pq by using customized comparator
     set<pair<string, int>, QComparator> pq;
     for(int i = 0; i < wordList.size(); i++){
         if(start.compare(wordList[i]) == 0){//starting point
@@ -132,7 +128,7 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"worms","black");
+    int distance = Dijkstra(adjacencyList,wordList,"graph","lords");
     cout << distance << endl;
     return 0;
 }
