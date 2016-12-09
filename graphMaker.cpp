@@ -109,7 +109,7 @@ int main()
     string word;
     string bucket;
     //ifstream myfile ("/Users/ashiragendelman/Documents/EC504/GraphMaker/4-words4.txt");
-    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words53.txt");
+    ifstream myfile ("/Users/yil/Desktop/504-project-repo/504project/5-words4497.txt");
     if(myfile)
     {
         while (getline(myfile,word)) {
