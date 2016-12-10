@@ -1,20 +1,13 @@
 
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 #include <fstream>
-#include <string.h>
 #include <vector>
 #include <map>
-#include <tuple>
-#include <utility>
-#include <limits>
 #include <unordered_set>
-#include <set>
+#include <time.h>
 #include "LinkedList.h"
 using namespace std;
-
+ofstream out ("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_LL_output.txt");
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
 int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
@@ -86,7 +79,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         s = previous;
         if(previous.compare("*") == 0) break;
     }
-    cout << path << endl;
+    path = path + " " + to_string(dist[stop]);
+    out << start + " to " + stop << ": ";
+    out << path << endl << "\n";
     //return the path sum of the ending point
     return dist[stop];
 };
@@ -98,7 +93,7 @@ int main() {
     map<string, vector<pair<string,int >> > adjacencyList;
     vector<string> wordList;
     pair< string, int> wordWeight;
-    ifstream myfile ("/Users/ashiragendelman/Documents/EC504/504project/5-words53_graph.txt");
+    ifstream myfile("/Users/sunmin/Desktop/EC504/CLion/504project/5-words53_graph.txt");
     if(myfile)
     {
         while (getline(myfile,list)) {
@@ -127,7 +122,18 @@ int main() {
         return -1;
     }
     myfile.close();
-    int distance = Dijkstra(adjacencyList,wordList,"angel","devil");
-    cout << distance << endl;
+    int count = 0;
+    clock_t start, end;
+    start = clock();
+    for (int i = 0; i < wordList.size(); i++) {
+        for (int j = i + 1; j < wordList.size(); j++) {
+            count ++;
+            int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
+        }
+    }
+    end = clock();
+    cout << "count ="<< count << endl;
+    cout << "total running time = " << (end-start)/double(CLOCKS_PER_SEC)<< endl;
+    cout << "average running time = " << ((end-start)/double(CLOCKS_PER_SEC))/count << endl;
     return 0;
 }

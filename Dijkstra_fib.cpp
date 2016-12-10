@@ -7,7 +7,7 @@
 #include"FibonacciHeap.h"
 #include <time.h>
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5-words53_graph_output.txt");
+ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_fib_heap_output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -88,7 +88,6 @@ int main() {
     map<string, vector<pair<string,int >> > adjacencyList;
     vector<string> wordList;
     pair< string, int> wordWeight;
-
     ifstream myfile("/Users/sunmin/Desktop/EC504/CLion/504project/5-words53_graph.txt");
     if(myfile)
     {
@@ -120,15 +119,16 @@ int main() {
     myfile.close();
     int count = 0;
     time_t start, end;
-    start = time(NULL);
+    start = clock();
 	for (int i = 0; i < wordList.size(); i++) {
 		for (int j = i + 1; j < wordList.size(); j++) {
             count ++;
             int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
 		}
 	}
-    end = time(NULL);
-    cout << "total running time = " << difftime(end, start) << endl;
-    cout << "average running time = " << difftime(end, start)/count << endl;
+    end = clock();
+    cout << "count = "<< count << endl;
+    cout << "total running time = " << (end-start)/double(CLOCKS_PER_SEC)<< endl;
+    cout << "average running time = " << ((end-start)/double(CLOCKS_PER_SEC))/count<< endl;
     return 0;
 }
