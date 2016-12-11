@@ -7,7 +7,7 @@
 #include"FibonacciHeap.h"
 #include <time.h>
 using namespace std;
-ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_fib_heap_output.txt");
+// ofstream out("/Users/sunmin/Desktop/EC504/CLion/504project/5_53_graph_fib_heap_output.txt");
 
 //Created by Yi Li 2016 fall
 //Modified by Yi Li, Avi Klunser, Min Sun, Xi Zhou
@@ -74,9 +74,9 @@ int Dijkstra(map<string, vector<pair<string,int >> >& adjacencyList
         s = previous;
         if(previous.compare("*") == 0) break;
     }
-    path = path + " " + to_string(dist[stop]);
-    out << start + " to " + stop << ": ";
-	out << path << endl << "\n";
+    // path = path + " " + to_string(dist[stop]);
+    // out << start + " to " + stop << ": ";
+	// out << path << endl << "\n";
     //return the path sum of the ending point
     return dist[stop];
 };
@@ -120,8 +120,12 @@ int main() {
     int count = 0;
     time_t start, end;
     start = clock();
-	for (int i = 0; i < wordList.size(); i++) {
-		for (int j = i + 1; j < wordList.size(); j++) {
+    int len = wordList.size();
+    int threshold = 200000;
+	for (int i = 0; i < len; i++) {
+        // To stop the loop earlier
+        if(count >= threshold) break;
+		for (int j = i + 1; j < len; j++) {
             count ++;
             int distance = Dijkstra(adjacencyList, wordList, wordList[i], wordList[j]);
 		}
