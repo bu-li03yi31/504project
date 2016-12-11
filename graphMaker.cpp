@@ -113,7 +113,6 @@ int main()
     if(myfile)
     {
         while (getline(myfile,word)) {
-            cout << word << endl;
             wordList.push_back(word);
         }
     }
@@ -124,7 +123,6 @@ int main()
     }
     myfile.close();
 
-    cout << wordList.size() << endl;
     for (int i =0; i< wordList.size(); i++) {
         for (int j=0; j<wordList[i].length(); j++) {
             bucket = wordList[i].substr(0,j) + '_' + wordList[i].substr(j+1,wordList[i].length()-1);
@@ -137,12 +135,10 @@ int main()
     int V = wordList.size();
     struct Graph* graph = createGraph(V);
     for (auto b: bucketList){
-        //cout << endl << b.first << " has the following " << b.second.size() <<  " words: ";
         if (b.first.size() > 1) {
             //for (auto w: b.second){
             for (int w=0; w<b.second.size(); w++){
 
-                //for (auto x: b.second()){
                 for (int x=w+1; x<b.second.size(); x++){
                     diffLetter_index = b.first.find("_");
                     weight = abs(b.second[w][diffLetter_index] - b.second[x][diffLetter_index]);
